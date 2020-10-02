@@ -7,21 +7,18 @@ mon_an3 = 'thịt chó'
 foods = ['phở', 'cơm', 'bún', 'thịt chó', 'bún đậu', 'phở']
 
 # a = input('Enter new item')
-# foods.append(a) # CREATE
-
-mon_thit_cho = foods[3]
-
+foods.append(a) # CREATE
 foods[3] = 'thịt bò' # UPDATE
-print('->>',mon_thit_cho)
-print(len(foods))
-# foods.remove('phở') # DELETE by value
-# foods.pop(3) # DELETE by index
-# removed_item = foods.pop(3)  # DELETE by index and save to variable
-# print('removed item', removed_item)
-index = foods.index('bún đậu')
-print(foods[index])
-for i in range(len(foods)):
+foods.remove('phở') # DELETE by value
+foods.pop(3) # DELETE by index
+removed_item = foods.pop(3)  # DELETE by index and save to variable
+print(foods[0])# READ ONE
+for i in range(len(foods)): # READ ALL
     print(i, foods[i])
+# find index of item
+index = foods.index('phở')
+# check if item in list
+result = 'phở' in foods
 # print('_______')
 # for food in foods:
 #     print(i)
