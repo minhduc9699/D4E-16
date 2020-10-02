@@ -7,7 +7,7 @@ mon_an3 = 'thịt chó'
 foods = ['phở', 'cơm', 'bún', 'thịt chó', 'bún đậu', 'phở']
 
 # a = input('Enter new item')
-foods.append(a) # CREATE
+foods.append('anything') # CREATE
 foods[3] = 'thịt bò' # UPDATE
 foods.remove('phở') # DELETE by value
 foods.pop(3) # DELETE by index
