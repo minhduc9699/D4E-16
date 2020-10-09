@@ -27,17 +27,20 @@ quizzes = [ # collection
             '9 chân',
             '2 chân',
         ],
-        'rightChoice': 1
+        'rightChoice': 3
     }
 ]
+count = 0
 for quiz in quizzes:
     print(quiz['question'])
     choices = quiz['choices']
     for i in range(len(choices)):
         print(f'{i+1}. {choices[i]}')
-
     user_choice = int(input('Enter your choice ')) - 1
     if user_choice == quiz['rightChoice']:
-        print('hoan hô!')
+        count += 1
     else:
         print('buồn quá')
+
+score = count / len(quizzes) * 100
+print(f'Score: {score}%')
