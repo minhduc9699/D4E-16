@@ -1,35 +1,13 @@
-quizzes = [ # collection 
-    {
-        'question': 'con chó có mấy chân?',
-        'choices': [
-            '1 chân', 
-            '2 chân', 
-            '9 chân', 
-            '4 chân',
-        ],
-        'rightChoice': 3
-    },
-    {
-        'question': 'con thỏ có mấy chân?',
-        'choices': [
-            '1 chân',
-            '2 chân',
-            '9 chân',
-            '4 chân',
-        ],
-        'rightChoice': 1
-    },
-    {
-        'question': 'con vịt có mấy chân?',
-        'choices': [
-            '1 chân',
-            '3 chân',
-            '9 chân',
-            '2 chân',
-        ],
-        'rightChoice': 3
-    }
-]
+from pymongo import MongoClient
+
+client = MongoClient()
+database = client.get_database('D4E16')
+quiz_collection = database.get_collection('quizzes')
+result_collection = database.get_collection('results')
+
+register = input('enter your nickname: ')
+quizzes = quiz_collection.find()
+total_quiz = quiz_collection.count()
 count = 0
 for quiz in quizzes:
     print(quiz['question'])
@@ -42,5 +20,9 @@ for quiz in quizzes:
     else:
         print('buồn quá')
 
-score = count / len(quizzes) * 100
-print(f'Score: {score}%')
+score = count / total_quiz * 100
+result_data = {
+    'username': register,
+    'score': score
+}
+result_collection.insert_one(result_data)
