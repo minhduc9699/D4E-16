@@ -1,4 +1,7 @@
 import pymysql
+from pymongo import MongoClient
+
+mongo_client = MongoClient()
 
 client = pymysql.connect(
     host='127.0.0.1',
@@ -32,15 +35,15 @@ cursor = client.cursor()
 #     )
 # ''')
 
-movie_id = '1211'
-movie_name = 'tenet'
-movie_year = '2020'
-writer = 'CN'
-movie_actor = []
+mongo_database = mongo_client.get_database('mongo_ex')
+movie_collection = mongo_database.get_collection('movies')
 
-cursor.execute(f''' 
-    INSERT INTO d4e16.movie(id, title, year, writer)
-    VALUES ('{movie_id}', '{movie_name}', '{movie_year}', '{writer}')
-''')
+movies = movie_collection.find({'actors': {'$ne': None}}) # EXTRACT
+
+for movie in movies:
+    cursor.execute(f''' 
+        INSERT INTO d4e16.movie(id, title, year, writer)
+        VALUES ('{movie["_id"]}', '{movie["title"]}', '{movie["year"]}', '{movie["writer"]}')
+    ''')
 
 client.commit()
